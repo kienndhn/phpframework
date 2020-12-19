@@ -5,7 +5,7 @@
         Auth::userGuest();
         if ($cart) {
             ?>
-            <table class="cart-detail">
+            <table class="cart-detail"  >
                 <thead>
                     <tr>
                         <th>Sản phẩm</th>
@@ -30,7 +30,8 @@
                             <td><?php echo $cart->pro_name ?></td>
                             <td><?php echo $cart->price ?></td>
                             <td>
-                                <input style="width: 44px;" type="number" name="quantity" value="<?php echo $cart->qty?>" min="1" onchange="updateQuantity('<?php echo URL?>','<?php echo $cart->id?>' ,this.value)"></td>
+                                <input style="width: 44px;" type="number" name="quantity" value="<?php echo $cart->qty?>" min="1" onchange="updateQuantity('<?php echo URL?>','<?php echo $cart->product?>' ,this.value)">
+                            </td>
                             <td>
                                 <!--<form class='d-inline' >-->
                                     <!--<input type="hidden" name="csrf" value="<?php new Csrf(); echo Csrf::get() ?>">-->
@@ -47,8 +48,7 @@
             <div class="checkout">
                 <label>Tổng tiền hàng: </label>
                 <span id="cost">
-                <?php echo number_format($total, 2 , '.', '');
-                ?>
+                <?php echo number_format($total, 2 , '.', '');?>
                 </span>
                 <button id="btn-checkout">Thanh toán</button>
             </div>
@@ -57,14 +57,14 @@
     </div>
 </div>
 <script>
-    function deletePro(url, id) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("content").innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", url + "/carts/delete/" + id, true);
-        xhttp.send();
-    }
+//    function deletePro(url, id) {
+//        var xhttp = new XMLHttpRequest();
+//        xhttp.onreadystatechange = function () {
+//            if (this.readyState == 4 && this.status == 200) {
+//                document.getElementById("content").innerHTML = this.responseText;
+//            }
+//        };
+//        xhttp.open("GET", url + "/carts/delete/" + id, true);
+//        xhttp.send();
+//    }
 </script>

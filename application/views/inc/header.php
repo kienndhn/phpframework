@@ -18,7 +18,9 @@
                         <a href="<?php echo URL ?>/users/login">Đăng nhập</a>
                         <a href="<?php echo URL ?>/users/register">Đăng ký</a>
                     <?php } else { ?>
-                        <?php if (Session::existed('user_cart')) { ?>
+                        <?php 
+                        
+                        if (Session::existed('user_cart')) { ?>
                             <div class = "cart">
                                 <a href = "<?php echo URL ?>/carts/cart">
                                     <img src = "<?php echo URL?>/public/uploads/cart.png" alt = "cart logo"> 
@@ -45,14 +47,19 @@
             </div>
             <div class = "header-content">
                 <div class = "logo">
-                    <a href = "index.php"><img src = "<?php echo PATH_URL_IMG ?>logo.png" alt = "shop logo"></a>
+                    <a href = "<?php echo URL?>/home/index"><img src = "<?php echo PATH_URL_IMG ?>logo.png" alt = "shop logo"></a>
                 </div>
                 <div class = "search">
                     <div class = "search-input">
-                        <form action="<?php echo URL ?>/home/search" method='POST' id="form1">
-                            <input type = "text" placeholder = "Enter keyword here" name="search" id="searchText">
+                        <form action="<?php echo URL ?>/home/search" method='POST' id="form1" autocomplete="off">
+                            <input type = "text" placeholder = "Enter keyword here" name="search" onkeyup="showResult('<?php echo URL?>', this.value)">
                             <button type="submit" form="form1" class = "search-button"><img src = "<?php echo URL?>/public/uploads/search.png" alt = "search logo"></button>
                         </form>
+                        <div id="livesearch" style="background-color: white"></div>
+<!--                        <form method="GET" id="form1">
+                            <input type = "text" placeholder = "Enter keyword here" name="search" id="searchText">
+                            <button onclick="searchProduct('<?php echo URL?>')" class = "search-button"><img src = "<?php echo URL?>/public/uploads/search.png" alt = "search logo"></button>
+                        </form>-->
                     </div>
                    
                 </div>

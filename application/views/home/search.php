@@ -1,3 +1,5 @@
+
+
 <!-- Nội dung trang home index -->
 <div class="content">
     <div class="container-flex">
@@ -62,15 +64,5 @@
     </div>
 </div>
 <script>
-    function addProduct(url, id, price) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("card-element").innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", url + "/carts/add/" + id + "/" + price, true);
-        xhttp.send();
-    }
-    
+   
 </script>

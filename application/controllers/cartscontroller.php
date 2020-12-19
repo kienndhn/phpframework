@@ -52,10 +52,8 @@ class CartsController extends Controller {
         $user_id = Session::name('user_id');
         if ($this->Cart->findCartPro($pro_id, $user_id) > 0) {
             $this->Cart->addOne($pro_id, $user_id);
-            
         } else {
             $this->Cart->addnew($pro_id, $user_id, $price);
-            
         }
         $cart = $this->Cart->getAllCart();
         $this->set('cart', $cart);
@@ -68,7 +66,7 @@ class CartsController extends Controller {
             $cartItems = 0;
         }
         Session::set('user_cart', $cartItems);
-        
+
         echo Session::get('user_cart');
     }
 
@@ -79,17 +77,35 @@ class CartsController extends Controller {
     public function updateQty($id) {
         Auth::userAuth();
         Csrf::CsrfToken();
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['upQty']) {
-            $qty = $_POST['qty'];
+        $q = $_POST['q'];
 
-            if ($qty < 1 && empty($qty)) {
-                Redirect::to('carts');
-            } else {
-                $this->Cart->updateQty($id, $qty);
-                Session::set('success', 'Qty has been updated');
-                Redirect::to('carts');
+        if ($q < 1 && empty($q)) {
+            
+        } else {
+            $this->Cart->updateQty($id, $q);
+            Session::set('success', 'Qty has been updated');
+        }
+        $cart = $this->Cart->getAllCart();
+        $this->set('cart', $cart);
+        $cartItems = 0;
+        if ($cart) {
+            foreach ($cart as $ct) {
+                $cartItems = $cartItems + $ct->qty;
+            }
+        } else {
+            $cartItems = 0;
+        }
+        Session::set('user_cart', $cartItems);
+        if ($cart) {
+            $total = 0;
+            $qty = 0;
+            foreach ($cart as $cart) {
+                $total = $total + ($cart->qty * $cart->price);
+                $qty = $qty + ($cart->qty);
             }
         }
+        $response= json_encode(array(number_format($total, 2, '.', ''), $cartItems));
+        echo $response;
     }
 
     /* >>>>>>>>>>>>>>>>>>>> */
@@ -98,22 +114,67 @@ class CartsController extends Controller {
 
     public function delete($id) {
         Auth::userAuth();
-        //Csrf::CsrfToken();
+        Csrf::CsrfToken();
         Session::set('success', 'Item has been deleted');
         $delete = $this->Cart->delete($id);
         $cart = $this->Cart->getAllCart();
         $this->set('cart', $cart);
         $cartItems = 0;
         if ($cart) {
-            foreach ($cart as $cart) {
-                $cartItems = $cartItems + $cart->qty;
+            foreach ($cart as $ct) {
+                $cartItems = $cartItems + $ct->qty;
             }
         } else {
             $cartItems = 0;
         }
         Session::set('user_cart', $cartItems);
-        $file = ROOTDIR . DS . 'application' . DS . 'views' . DS . "carts" . DS . "cart". '.php';
-        echo file_get_contents($file);
+        $listPro = "";
+        if ($cart) {
+
+            $listPro = '
+            <table class="cart-detail"  >
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>' .
+                    '<tbody>';
+            $total = 0;
+            $qty = 0;
+            foreach ($cart as $cart) {
+                $listPro = $listPro . '<tr>
+                        <td>
+                            <div class="product-img">' .
+                        '<img id="img-product" src="' . URL . '/uploads/' . $cart->pro_image . '.">' .
+                        '           </div>' .
+                        '       </td>' .
+                        '       <td>' . $cart->pro_name . '</td>
+                        <td>' . $cart->price . '</td>' .
+                        '       <td>
+                            <input style="width: 44px;" type="number" name="quantity" value="' . $cart->qty . '" min="1" onchange="updateQuantity(\'' . URL . '\',\'' . $cart->product . '\' ,this.value)">
+                        </td>
+                        <td><button class="btn-delete" onclick="deletePro(\'' . URL . '\', \'' . $cart->cart_id . '\')"><img src="../../public/img/delete.png"></button>
+                        </td>' .
+                        '   </tr>';
+                $total = $total + ($cart->qty * $cart->price);
+                $qty = $qty + ($cart->qty);
+            }
+            $listPro = $listPro . '  </tbody> 
+            </table> 
+                <div class="checkout">
+                <label>Tổng tiền hàng: </label>
+                <span id="cost">' . number_format($total, 2, '.', '')
+                    . '
+                </span>
+                <button id="btn-checkout">Thanh toán</button>
+            </div>';
+        }
+        $response = json_encode(array($listPro, $cartItems));
+        echo $response;
     }
 
     /* >>>>>>>>>>>>>>>>>>>> */
@@ -215,7 +276,7 @@ class CartsController extends Controller {
                     );
                 }
 
-                $this->cartModel->clear();
+                $this->Card->clear();
                 Session::set('user_cart', '0');
                 Redirect::to("carts/thank");
             } else {

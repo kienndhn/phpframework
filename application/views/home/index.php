@@ -37,7 +37,7 @@
         </div>
         <!-- bên phải -->
         <div class="products">
-            <div class="products-list">
+            <div class="products-list" id="products">
                 <?php
                 if ($products) {
                     foreach ($products as $pro) {
@@ -63,14 +63,15 @@
     </div>
 </div>
 <script>
-    function addProduct(url, id, price) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("card-element").innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", url + "/carts/add/" + id + "/" + price, true);
-        xhttp.send();
-    }
+//    function addProduct(url, id, price) {
+//        var xhttp = new XMLHttpRequest();
+//        xhttp.onreadystatechange = function () {
+//            if (this.readyState == 4 && this.status == 200) {
+//                document.getElementById("card-element").innerHTML = this.responseText;
+//            }
+//        };
+//        xhttp.open("GET", url + "/carts/add/" + id + "/" + price, true);
+//        xhttp.send();
+//    }
+
 </script>

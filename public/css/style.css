@@ -48,6 +48,7 @@ body {
     margin-left: 20px;
 }
 .search {
+    min-width: 200px;
     display: flex;
     background-color: white;
     height: 36%;
