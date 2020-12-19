@@ -7,8 +7,7 @@
             <div class="catagories-header">
                 <img src="<?php echo URL ?>list.png">
                 <span>Tất cả danh mục</span>
-            </div>
-            <ul class="catagories-list">
+                <ul class="catagories-list">
                 <?php
                 if ($categories) {
                     foreach ($categories as $cat) {
@@ -19,11 +18,12 @@
                 }
                 ?>
             </ul>
+            </div>
+            
             <div class="catagories-header">
                 <img src="<?php echo URL ?>list.png">
                 <span>Hãng</span>
-            </div>
-            <ul class="catagories-list">
+                <ul class="catagories-list">
                 <?php
                 if ($manufactures) {
                     foreach ($manufactures as $man) {
@@ -34,6 +34,8 @@
                 }
                 ?>
             </ul>
+            </div>
+            
         </div>
         <!-- bên phải -->
         <div class="products">
@@ -48,9 +50,9 @@
                                     <a href="<?php echo URL ?>/home/details/<?php echo $pro->product_id ?>"><img id="img-product" src="<?php echo URL ?>/uploads/<?php echo $pro->image ?>" alt=""></a>
                                 </div>
                                 <div class="product-info">
-                                    <div id="name-product"><?php echo $pro->name ?></div>
-                                    <div id="price-product"><?php echo $pro->price ?> Đồng</div>
-                                    <div id="btn-add-to-cart" ><button onclick="addProduct('<?php echo URL ?>', '<?php echo $pro->product_id ?>', '<?php echo $pro->price ?>')">Add to cart</button></div>
+                                    <div class="name-product"><?php echo $pro->name ?></div>
+                                    <div class="price-product"><?php echo $pro->price ?> Đồng</div>
+                                    <div class="btn-add-to-cart" ><button onclick="addProduct('<?php echo URL ?>', '<?php echo $pro->product_id ?>', '<?php echo $pro->price ?>')">Add to cart</button></div>
                                 </div>
                             </div>
                         </div>
