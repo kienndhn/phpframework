@@ -193,7 +193,7 @@ class UsersController extends Controller {
                                 Session::set('admin_name', $user->full_name);
                                 Session::set('admin_id', $user->user_id);
                             }
-                            Redirect::to('users/profile');
+                            Redirect::to('home/index');
                         }
                     } else {
                         $error['errPassword'] = "Password Not Valid";

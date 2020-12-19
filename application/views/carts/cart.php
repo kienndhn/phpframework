@@ -21,38 +21,42 @@
                     $qty = 0;
                     foreach ($cart as $cart) {
                         ?>
-                        <tr>
+                        <tr class="cart-product">
                             <td>
-                                <div class="product-img">
-                                    <img id="img-product" src="<?php echo URL ?>/uploads/<?php echo $cart->pro_image ?>">
-                                </div>
+                                <img id="img-product" style="width: 50px;height: 50px;" src="<?php echo URL ?>/uploads/<?php echo $cart->pro_image ?>">
+
                             </td>
                             <td><?php echo $cart->pro_name ?></td>
                             <td><?php echo $cart->price ?></td>
                             <td>
-                                <input style="width: 44px;" type="number" name="quantity" value="<?php echo $cart->qty?>" min="1" onchange="updateQuantity('<?php echo URL?>','<?php echo $cart->product?>' ,this.value)">
+                                <input style="width: 44px;" type="number" name="quantity" value="<?php echo $cart->qty ?>" min="1" onchange="updateQuantity('<?php echo URL ?>', '<?php echo $cart->product ?>', this.value)">
+
                             </td>
                             <td>
                                 <!--<form class='d-inline' >-->
-                                    <!--<input type="hidden" name="csrf" value="<?php new Csrf(); echo Csrf::get() ?>">-->
-                                    <button class='btn-delete' onclick="deletePro('<?php echo URL ?>', '<?php echo $cart->cart_id ?>')"><img src="../../public/img/delete.png"></button>
+                                    <!--<input type="hidden" name="csrf" value="<?php
+                                new Csrf();
+                                echo Csrf::get()
+                                ?>">-->
+                                <button class='btn-delete' onclick="deletePro('<?php echo URL ?>', '<?php echo $cart->cart_id ?>')"><img src="../../public/img/delete.png"></button>
                                 <!--</form>-->
                             </td>
                         </tr>
                         <?php
-                            $total = $total + ($cart->qty * $cart->price);
-                            $qty = $qty + ($cart->qty);
-                        }?>
+                        $total = $total + ($cart->qty * $cart->price);
+                        $qty = $qty + ($cart->qty);
+                    }
+                    ?>
                 </tbody>
             </table>
             <div class="checkout">
                 <label>Tổng tiền hàng: </label>
                 <span id="cost">
-                <?php echo number_format($total, 2 , '.', '');?>
+                    <?php echo number_format($total, 2, '.', ''); ?>
                 </span>
                 <button id="btn-checkout">Thanh toán</button>
             </div>
-<?php } ?>
+        <?php } ?>
 
     </div>
 </div>

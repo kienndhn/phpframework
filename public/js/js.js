@@ -7,12 +7,17 @@ function addProduct(url, id, price) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("card-element").innerHTML = this.responseText;
+            if (document.getElementById("card-element")) {
+                document.getElementById("card-element").innerHTML = this.responseText;
+            }
+            else{
+                document.getElementById("alert").style.display="block";
+            }
         }
     };
     xhttp.open("GET", url + "/carts/add/" + id + "/" + price, true);
     xhttp.send();
-    
+
 }
 function deletePro(url, id) {
     var xhttp = new XMLHttpRequest();
@@ -41,9 +46,9 @@ function showResult(url, str) {
             document.getElementById("livesearch").style.backgroundColor = "white";
         }
     }
-    xmlhttp.open("POST",url + "/home/livesearch", true);
+    xmlhttp.open("POST", url + "/home/livesearch", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("q="+str);
+    xmlhttp.send("q=" + str);
     //xmlhttp.send();
 }
 
@@ -61,7 +66,7 @@ function updateQuantity(url, id, str) {
             document.getElementById("card-element").innerHTML = myObj[1];
         }
     }
-    xmlhttp.open("POST",url + "/carts/updateQty/"+id, true);
+    xmlhttp.open("POST", url + "/carts/updateQty/" + id, true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("q="+str);
+    xmlhttp.send("q=" + str);
 }
