@@ -18,7 +18,7 @@
                     <ul class="f-hdmn">
                         <?php if (Session::existed('user_cart')) { ?>
                             <li class="nav-item">
-                                <a class="" href="<?php echo URL ?>/carts/cart">Cart<i class=""></i>
+                                <a class="" href="<?php echo URL ?>/cart/cart">Cart<i class=""></i>
                                     <span style='border-radius:50%'>
                                         <?php Session::get('user_cart') ?>
                                     </span>

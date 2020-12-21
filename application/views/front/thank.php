@@ -5,6 +5,6 @@
         <h5 class="text-muted my-3"> 
             Thank You For Purshasing, We Will Contact You Soon...
         </h5>
-        <a href="<?php echo URL ?>/carts/orders/" class='d-block mb-3'>see your orders...</a>
+        <a href="<?php echo URL ?>/cart/orders/" class='d-block mb-3'>see your orders...</a>
         <a href="<?php echo URL ?>/home" class="btn btn-secondary btn-sm" style="font-size:13px"><i class="fa fa-arrow-left"></i> Go Back</a>
     </div>

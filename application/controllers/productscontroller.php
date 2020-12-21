@@ -53,7 +53,8 @@ class ProductsController extends Controller {
         Csrf::CsrfToken();
         //$this->categoryModel = $this->model('Category');
         //$this->manufactureModel = $this->model('Manufacture');
-
+        $cate=$this->Product->categoryModel->getAllCat();
+        $manu=$this->Product->manufactureModel->getAllMan();
         $this->set('title', 'Add Product');
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['addProduct']) {
             $name = $_POST['name'];
@@ -120,13 +121,13 @@ class ProductsController extends Controller {
                 Session::set('success', 'New product added successfully');
                 Redirect::to('products/all');
             } else {
-                $this->set('cat', $this->Product->categoryModel->getAllCat());
-                $this->set('man', $this->Product->manufactureModel->getAllMan());
+                $this->set('cat', $cate);
+                $this->set('man', $manu);
                 //$this->view('products.add', $data);
             }
         } else {
-            $this->set('cat', $this->Product->categoryModel->getAllCat());
-            $this->set('man', $this->Product->manufactureModel->getAllMan());
+            $this->set('cat', $cate);
+            $this->set('man', $manu);
             //$this->view('products.add',$data);
         }
     }
@@ -277,7 +278,7 @@ class ProductsController extends Controller {
         Session::set('success', 'Item has been deleted');
         $delete = $this->Product->delete($id);
         if ($delete) {
-            //Redirect::to('products');
+            Redirect::to('products/all');
         }
     }
 

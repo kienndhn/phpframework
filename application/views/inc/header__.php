@@ -36,7 +36,7 @@
                         <?php } else { ?>
                             <?php if (Session::existed('user_cart')) { ?>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo URL ?>/carts/cart">Cart<i class="fa fa-shopping-cart"></i>
+                                    <a class="nav-link" href="<?php echo URL ?>/cart/cart">Cart<i class="fa fa-shopping-cart"></i>
                                         <span class="badge badge-danger ml-0" style='border-radius:50%'>
                                             <?php Session::get('user_cart') ?>
                                         </span>
@@ -44,7 +44,7 @@
                                 </li>
                             <?php } ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo URL ?>/carts/orders">My Orders</a>
+                                <a class="nav-link" href="<?php echo URL ?>/cart/orders">My Orders</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo URL ?>/users/profile">Profile</a>

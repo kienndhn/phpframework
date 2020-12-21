@@ -1,26 +1,25 @@
 
+<div class="content">
+        <div class="profile" style="max-width: 800px">
+        <!-- <h5>Manufactures Management</h5>
+        <input type="text" id='search_man' class="form-control w-50 mx-auto" placeholder="Search"> -->
+        <h2 class="signup-heading">Tất cả sản phẩm</h2>
+            <span style="width: 15%; line-height: 24px"><a href="<?php echo URL ?>/products/add">Thêm sản phẩm mới</a></span>
+            <span>Search</span>
+            <form style="display: inline-block;" action=""><input type="text" placeholder="enter a product"></form>
 
-    <div class="  text-center mt-4">
-
-        <h5>Products Management</h5>
-            
-        <input type="text" id='search_pro' class="form-control w-50 mx-auto" placeholder="Search">
-   
-        <span class="float-right m-3">
-            <a href="<?php echo URL ?>/products/add">Add new pro +</a>
-        </span>
-        <?php if($products){ ?> 
-        <table class="table table-dark table-responsive-md searched">
+        <?php if($products ){  ?>
+        <table class="all-product">
             <thead>
                 <tr>
-                    <th>Series</th>
-                    <th>Name</th>
-                    <th>Creator</th>
-                    <th>Status</th>
-                    <th>Category</th>
-                    <th>Brand</th>
-                    <th>image</th>
-                    <th>Actions</th>
+                    <th>stt</th>
+                    <th>Tên</th>
+                    <th>Người tạo</th>
+                    <th>Trạng thái</th>
+                    <th>Loại</th>
+                    <th>Hãng</th>
+                    <th>Ảnh</th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +59,7 @@
             </tbody>
         </table>
         <?php }else{?>
-                    <p class="text-center text-danger"><span class='btn btn-sm btn-danger' style='border-radius:50%'><i class="fa fa-warning"></i></span> There is no Products</p>
+                    <p class="text-center text-danger"><span class='btn btn-sm btn-danger' style='border-radius:50%'><i class="fa fa-warning"></i></span> Không có sản phẩm</p>
                     <?php  } ?>
+        </div>          
     </div>

@@ -1,5 +1,5 @@
 <?php //require_once ROOT ."/views/inc/header.php" ?>
-    <div class="  mt-4">
+<!--    <div class="  mt-4">
         <div class="row">
             <div class="col-10 col-md-8 m-auto">
             <?php
@@ -19,7 +19,7 @@
             </form>
             </div>
         </div>
-    </div>
+    </div>-->
 <!--<form method="POST" action='<?php echo URL ?>/users/forgotPassword'>
     <div class="input-form">
         <div class="">
@@ -33,3 +33,23 @@
     </div>
 </form>-->
 <?php //require_once ROOT ."/views/inc/footer.php" ?>
+
+<div class="content">
+    <div class="container-form">
+        <div class="signup">
+            <h1 class="signup-heading">Quên mật khẩu</h1>
+            <p class="signup-already">
+                <span>Nhập email để lấy mã khôi phục</span>
+                
+            </p>
+            <form action="<?php echo URL ?>/users/forgotPassword" class="signup-form" method="POST" >
+                <label for="username" class="signup-label">Email</label>
+                <input type="text" name="email" class="signup-input" required placeholder="enter your username">
+                <input type="submit" name="forgotPassword" class="signup-submit"></input>
+            </form>
+            
+            
+            
+        </div>
+    </div>
+</div>

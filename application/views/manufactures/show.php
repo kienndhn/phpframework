@@ -38,5 +38,3 @@
         </a>
     </div>
 
-
-<?php //require_once ROOT ."/views/inc/adminFooter.php" ?>

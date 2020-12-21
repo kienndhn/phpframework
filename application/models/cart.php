@@ -29,10 +29,11 @@ class Cart extends Model {
         }
     }
 
-    public function addOne($pro_id) {
-        $this->query("UPDATE cart SET qty=qty + 1
+    public function addOne($pro_id, $num) {
+        $this->query("UPDATE cart SET qty=qty + :num
             WHERE product = :pro_id AND user = :user");
         $this->bind(':pro_id', $pro_id);
+        $this->bind(':num', $num);
         $this->bind(':user', Session::name('user_id'));
         $this->execute();
     }

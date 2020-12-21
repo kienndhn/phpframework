@@ -179,7 +179,7 @@ class UsersController extends Controller {
                             $cartItems = 0;
                             $carts = $this->User->cartModel->getAllCart();
                             if ($carts) {
-                                foreach ($carts as $cart) {
+                                foreach ($cart as $cart) {
                                     $cartItems = $cartItems + $cart->qty;
                                 }
                             } else {
@@ -213,7 +213,7 @@ class UsersController extends Controller {
         Session::clear('user_name');
         Session::clear('user_id');
         Session::destroy();
-        Redirect::to('users/login');
+        Redirect::back();
     }
 
     /* >>>>>>>>>>>>>>>>>>>> */
@@ -365,8 +365,10 @@ class UsersController extends Controller {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (isset($_POST['newPassword'])) {
                 $password = $_POST['password'];
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                if (strlen($password) == 0) {
+                $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $password2 = $_POST['password2'];
+                
+                if (strlen($password) < 8) {
                     $error['errPassword'] = "Your Password Must Contain At Least 8 Characters!";
                     $this->set('errPassword', 'Your Password Must Contain At Least 8 Characters!');
                 }
@@ -379,7 +381,11 @@ class UsersController extends Controller {
                 // elseif(!preg_match("#[a-z]+#",$password)) {
                 //      $data['errPassword'] = "Your Password Must Contain At Least 1 Lowercase Letter!";
                 // } 
-
+                if ($password != $password2) {
+                    $error['errPassword2'] = 'Password not match';
+                    $this->set('errPassword2', 'Password not match');
+                }
+                
                 if (empty($error['errPassword'])) {
                     if ($this->User->resetP($vkey, $hashedPassword)) {
                         Email::sendPass($email, $vkey);
@@ -390,6 +396,7 @@ class UsersController extends Controller {
                         //$this->view('users.resetPassword', $data);
                     };
                 } else {
+                    $this->set('vkey', $vkey);
                     //$this->view('users.resetPassword', $data);
                 }
             }

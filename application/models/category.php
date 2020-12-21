@@ -41,7 +41,7 @@
         public function add($cat_name,$cat_user,$description){
             $this->query("INSERT INTO 
             categories (cat_name,cat_user,active,description)
-            VALUES (:cat_name,:cat_user,0,:description)");
+            VALUES (:cat_name,:cat_user,1,:description)");
             $this->bind(':cat_name',$cat_name);
             $this->bind(':cat_user',$cat_user);
             $this->bind(':description',$description);

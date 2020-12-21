@@ -44,7 +44,7 @@
         public function add($man_name,$man_user,$description){
             $this->query("INSERT INTO 
             manufactures (man_name,man_user,active,description)
-            VALUES (:man_name,:man_user,0,:description)");
+            VALUES (:man_name,:man_user,1,:description)");
             $this->bind(':man_name',$man_name);
             $this->bind(':man_user',$man_user);
             $this->bind(':description',$description);

@@ -1,78 +1,27 @@
-<!--
-<?php //require_once ROOT ."/views/inc/adminHeader.php"   ?>
-<?php require_once ROOTDIR . "/application/views/inc/sidebar.php" ?>
 
-    <div class="input-form">
+<div class="content">
 
-        <div class="">
-            <h2 class='text-muted text-center'>Add New Manufacture</h2>
-        </div>
-        <div class="">
+    <div class="container-form">
+        <div class="signup">
+            <h1 class="signup-heading">Thêm Hãng mới</h1>
+
             <form action="<?php echo URL ?>/manufactures/add" method="POST">
 
-                <div class="form-group">
-                    <input type="text" name="manufacture" placeholder="Enter manufacture name" class="form-control <?php echo isset($errMan) ? 'is-invalid' : '' ?>">
-                    <?php echo isset($errMan) ? '<div class="invalid-feedback">' . $errMan . '</div>' : '' ?>
-                </div>
-                <div class="from-group mb-2">
-                    <textarea 
-                        name="description" 
-                        placeholder="Enter manufacture description" 
-                        class="form-control <?php echo isset($errDes) ? 'is-invalid' : '' ?>"
-                        ></textarea>
-                        <?php echo isset($errDes) ? '<div class="invalid-feedback">' . $errDes . '</div>' : '' ?>
-                </div>
-                <div class="form-group">
-                    <input type="hidden" name="csrf" value="<?php new Csrf();
-                        echo Csrf::get()
-                        ?>">
-                    <a href='<?php echo URL ?>/manufactures/all' class="btn btn-sm btn-secondary">
-                        <i class="fa fa-arrow-left"></i>
-                        Go Back
-                    </a>
-                    <input type="submit" name='addManufacture' value='Add' class="btn btn-success btn-sm">
-                </div>
-
-            </form>
-        </div>
-    </div>
--->
-<?php //require_once ROOT ."/views/inc/adminHeader.php"   ?>
-<?php //require_once ROOTDIR . "/application/views/inc/sidebar.php" ?>
-
-    <div class="content">
-
-        <div class="profile" style="max-width: 500px;">
-            <h2 class='signup-heading'>Add New Manufacture</h2>
-        <div class="admin-edit">
-            <form action="<?php echo URL ?>/manufactures/add" method="POST">
-
-                <div class="form-group">
-                    <input type="text" name="manufacture" placeholder="Enter manufacture name" class="form-control <?php echo isset($errMan) ? 'is-invalid' : '' ?>">
-                    <?php echo isset($errMan) ? '<div class="invalid-feedback">' . $errMan . '</div>' : '' ?>
-                </div>
+                    <label for="name" class="signup-label">Tên</label>
+                    <input type="text" name="manufacture" placeholder="Nhập tên hãng" class="signup-input" required>
+                   
                 <div class="">
-                    <textarea class="admin-textarea"
-                        name="description" 
-                        placeholder="Enter manufacture description" 
-                        class="form-control <?php echo isset($errDes) ? 'is-invalid' : '' ?>"
-                        ></textarea>
-                        <?php echo isset($errDes) ? '<div class="invalid-feedback">' . $errDes . '</div>' : '' ?>
+                    <label for="name" class="signup-label">Mô tả hãng</label>
+                    <textarea name="description" placeholder="Mô tả hãng" class="signup-input"></textarea>
+                              
                 </div>
                 <div class="form-group">
-                    <input type="hidden" name="csrf" value="<?php new Csrf();
-                        echo Csrf::get()
-                        ?>">
-                        <button class="admin-button">
-                    <a href='<?php echo URL ?>/manufactures/all' class="btn btn-sm btn-secondary">
-                        <i class="fa fa-arrow-left"></i>
-                        Go Back
-                    </a>
-                    </button>
-                    <input style="width: 30%;" type="submit" name='addManufacture' value='Add'>
+                    <input type="hidden" name="csrf" value="<?php new Csrf(); echo Csrf::get() ?>">
+                    <input class="signup-submit" type="submit" name='addManufacture' value='Thêm'>
                 </div>
-</div>
-            </form>
         </div>
+        </form>
     </div>
+</div>
+</div>
 

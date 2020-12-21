@@ -64,7 +64,7 @@
             </div>
             <div class="card-footer">
                 <a href="<?php echo URL ?>/home" class="btn btn-secondary btn-sm" style="font-size:13px"><i class="fa fa-arrow-left"></i> Go Back</a>
-                <a href="<?php echo URL ?>/carts/add/<?php echo $data['product']->product_id ?>/<?php echo $data['product']->price  ?>" class="btn btn-danger btn-sm" style="font-size:13px">Add To Cart <i class="fa fa-shopping-cart"></i></a>
+                <a href="<?php echo URL ?>/cart/add/<?php echo $data['product']->product_id ?>/<?php echo $data['product']->price  ?>" class="btn btn-danger btn-sm" style="font-size:13px">Add To Cart <i class="fa fa-shopping-cart"></i></a>
             </div>
         </div>
     </div>

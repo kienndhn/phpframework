@@ -36,10 +36,7 @@
                     ?>
                 </ul>
             </div>
-            <div class="alert" id="alert">
-                <span class="closebtn">&times;</span>  
-                <strong><a href="<?php echo URL . '/users/login' ?>">đăng nhập</a></strong> 
-            </div>
+            
 
         </div>
         <!-- bên phải -->
@@ -60,7 +57,7 @@
                                 <div class="product-info">
                                     <div class="name-product"><?php echo $pro->name ?></div>
                                     <div class="price-product"><?php echo $pro->price ?> Đồng</div>
-                                    <div class="btn-add-to-cart" ><button onclick="addProduct('<?php echo URL ?>', '<?php echo $pro->product_id ?>', '<?php echo $pro->price ?>')">Add to cart</button></div>
+                                    <div class="btn-add-to-cart" ><button onclick="addProduct('<?php echo URL ?>', '<?php echo $pro->product_id ?>', '<?php echo $pro->price ?>',1)">Add to cart</button></div>
                                 </div>
                             </div>
                         </div>
@@ -73,34 +70,7 @@
     </div>
 </div>
 <style>
-    .alert {
-        display: none;
-        padding: 20px;
-        background-color: #f44336;
-        color: white;
-        opacity: 1;
-        transition: opacity 0.6s;
-        margin-bottom: 15px;
-    }
-
-    .alert.success {background-color: #4CAF50;}
-    .alert.info {background-color: #2196F3;}
-    .alert.warning {background-color: #ff9800;}
-
-    .closebtn {
-        margin-left: 15px;
-        color: white;
-        font-weight: bold;
-        float: right;
-        font-size: 22px;
-        line-height: 20px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .closebtn:hover {
-        color: black;
-    }
+    
 </style>
 <script>
 //    function addProduct(url, id, price) {
@@ -110,17 +80,8 @@
 //                document.getElementById("card-element").innerHTML = this.responseText;
 //            }
 //        };
-//        xhttp.open("GET", url + "/carts/add/" + id + "/" + price, true);
+//        xhttp.open("GET", url + "/cart/add/" + id + "/" + price, true);
 //        xhttp.send();
 //    }
-    var close = document.getElementsByClassName("closebtn");
-    var i;
-
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function () {
-            var div = this.parentElement;
-
-            div.style.display = "none";
-        }
-    }
+    
 </script>

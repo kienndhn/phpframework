@@ -28,7 +28,12 @@
             //$this->view('orders.show', $data);
         }
 
-
+//        public function myOrder(){
+//            Auth::userGuest();
+//            $this->set('title', 'Đơn hàng của tôi');
+//            $id = Session::get("user_id");
+//            $this->set('orders', $this->Order->show($id));
+//        }
 
         /*>>>>>>>>>>>>>>>>>>>>*/
         #<--->  activate  <--->#

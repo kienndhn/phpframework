@@ -1,52 +1,28 @@
 
-<?php// require_once ROOT ."/views/inc/adminHeader.php" ?>
-<?php require_once ROOTDIR ."/application/views/inc/sidebar.php" ?>
-        <div class="">
-            <div class="row">
-                <div class="col-10 col-md-6  m-auto">
+<div class="content">
 
-                <div class="card my-4">
-                
-                        <div class="card-header">
-                            <h5 class='text-muted text-center'>Edit Category</h5>
-                        </div>
-                        <div class="card-body">
-                            <form action="<?php echo URL?>/categories/update/<?php echo $category->cat_id ?>" method="POST">
-    
-                                <div class="form-group">
-                                    <input 
-                                        value="<?php echo $category->cat_name ?>"
-                                        type="text" 
-                                        name="category" 
-                                        placeholder="Enter category name" 
-                                        class="form-control <?php echo  isset($errCat) ?  'is-invalid' : '' ?>"
-                                    >
-                                    <input type="hidden" name="cat_id" value="<?php echo $category->cat_id ?>">
-                                    <?php echo  isset($errCat) ?  '<div class="invalid-feedback">'.$errCat.'</div>' : '' ?>
-                                </div>
-                                <div class="from-group mb-2">
-                                    <textarea 
-                                        name="description" 
-                                        class="form-control <?php echo  isset($errDes) ?  'is-invalid' : '' ?>"
-                                    ><?php echo $category->description ?>
-                                    </textarea>
-                                    <?php echo  isset($errDes) ?  '<div class="invalid-feedback">'.$errDes.'</div>' : '' ?>
-                                </div>
+    <div class="container-form">
+        <div class="signup">
+            <h1 class="signup-heading">Thay đổi</h1>
+            <form action="<?php echo URL ?>/categories/update/<?php echo $category->cat_id ?>" method="POST">
 
-                                <div class="form-group">
-                                <input type="hidden" name="csrf" value="<?php new Csrf(); echo Csrf::get()?>">
-                                <a href='<?php echo URL ?>/categories/all' class="btn btn-sm btn-secondary">
-                                    <i class="fa fa-arrow-left"></i>
-                                    Go Back
-                                </a>
-                                    <input type="submit" name='editCategory' value='Edit' class="btn btn-success btn-sm">
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
+                <div class="">
+                    <label for="name" class="signup-label">Tên danh mục</label>
+                    <input value="<?php echo $category->cat_name ?>" type="text" name="category" placeholder="nhập tên danh mục" class="signup-input" required>
+                    <input type="hidden" name="cat_id" value="<?php echo $category->cat_id ?>">
                 </div>
-            </div>
-        </div>
+                <div class="">
+                    <label for="name" class="signup-label">Mô tả danh mục</label>
+                    <textarea name="description" class="signup-input" required placeholder="nhập mô tả danh mục"><?php echo $category->description ?></textarea>                
+                </div>
 
-<?php //require_once ROOT ."/views/inc/adminFooter.php" ?>
+                <div class="">
+                    <input type="hidden" name="csrf" value="<?php new Csrf();
+                    echo Csrf::get() ?>">     
+                    <input class="signup-submit"  type="submit" name='editManufacture' value='Thay đổi'>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,9 @@
 
-<?php require_once ROOT ."/views/inc/header.php" ?>
+<?php //require_once ROOT ."/views/inc/header.php" ?>
     <div class="my-4 mx-auto">
-    <?php  if($data['cart']){ ?>
+    <?php 
+    Auth::userGuest();
+    if($cart){ ?>
         <table style='background:#ffffff' class="table">
             <thead class='thead-dark'>
                 <tr>
@@ -17,7 +19,7 @@
                     $total = 0;
                     $qty = 0;
                    
-                        foreach ($data['cart'] as $cart) {?>
+                        foreach ($cart as $cart) {?>
                             <tr>
                                 <td><?php echo $cart->pro_name ?></td>
                                 <td><?php echo $cart->price ?></td>
@@ -74,31 +76,31 @@
             <div class="card-body">
                 <form id="payment-form" action="<?php echo URL ?>/cart/checkout" method="POST">
                     <div class="form-group">
-                        <input type="text" name="name" placeholder="Full Name" class="form-control <?php echo  isset($data['errName']) ?  'is-invalid' : '' ?>">
-                        <?php echo  isset($data['errName']) ?  '<div class="invalid-feedback">'.$data['errName'].'</div>' : '' ?>
+                        <input type="text" name="name" placeholder="Full Name" class="form-control <?php echo  isset($errName) ?  'is-invalid' : '' ?>">
+                        <?php echo  isset($errName) ?  '<div class="invalid-feedback">'.$errName.'</div>' : '' ?>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="email" placeholder="Email" class="form-control <?php echo  isset($data['errEmail']) ?  'is-invalid' : '' ?>">
-                        <?php echo  isset($data['errEmail']) ?  '<div class="invalid-feedback">'.$data['errEmail'].'</div>' : '' ?>
+                        <input type="text" name="email" placeholder="Email" class="form-control <?php echo  isset($errEmail) ?  'is-invalid' : '' ?>">
+                        <?php echo  isset($errEmail) ?  '<div class="invalid-feedback">'.$errEmail.'</div>' : '' ?>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="mobile" placeholder="Enter mobile" class="form-control <?php echo  isset($data['errMobile']) ?  'is-invalid' : '' ?>">
-                        <?php echo  isset($data['errMobile']) ?  '<div class="invalid-feedback">'.$data['errMobile'].'</div>' : '' ?>
+                        <input type="text" name="mobile" placeholder="Enter mobile" class="form-control <?php echo  isset($errMobile) ?  'is-invalid' : '' ?>">
+                        <?php echo  isset($errMobile) ?  '<div class="invalid-feedback">'.$errMobile.'</div>' : '' ?>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="address" placeholder="Enter address" class="form-control <?php echo  isset($data['errAddress']) ?  'is-invalid' : '' ?>">
-                        <?php echo  isset($data['errAddress']) ?  '<div class="invalid-feedback">'.$data['errAddress'].'</div>' : '' ?>
+                        <input type="text" name="address" placeholder="Enter address" class="form-control <?php echo  isset($errAddress) ?  'is-invalid' : '' ?>">
+                        <?php echo  isset($errAddress) ?  '<div class="invalid-feedback">'.$errAddress.'</div>' : '' ?>
                     </div>
                     <div class="form-group">
                         <input type="text" name="city" placeholder="Enter your city name" class="form-control 
-                        stripeElement stripeElement--empty <?php echo  isset($data['errCity']) ?  'is-invalid' : '' ?>">
-                        <?php echo  isset($data['errCity']) ?  '<div class="invalid-feedback">'.$data['errCity'].'</div>' : '' ?>
+                        stripeElement stripeElement--empty <?php echo  isset($errCity) ?  'is-invalid' : '' ?>">
+                        <?php echo  isset($errCity) ?  '<div class="invalid-feedback">'.$errCity.'</div>' : '' ?>
                     </div>
                     <input type="radio" class='d-none' name="payment_method" value='cash' id='cash' onclick='paymentCheck()'>
                     <label for="cash" class="mr-4"><i class="fa fa-2x text-success fa-money"></i></label>
                     <input type="radio" class='d-none' name="payment_method" value='stripe' id='stripe' onclick='paymentCheck()'>
                     <label for="stripe" class='mr-4'><i class="fa fa-2x text-info fa-cc-stripe"></i> </label>
-                    <small><?php echo  isset($data['errMethod']) ?  '<div class="text-danger">'.$data['errMethod'].'</div>' : '' ?></small>
+                    <small><?php echo  isset($errMethod) ?  '<div class="text-danger">'.$errMethod.'</div>' : '' ?></small>
                     <small class="text-muted  d-block my-2">if you want online payment click twice on stripe</small>
                     <div class="form-row" >
                         <label for="card-element">
@@ -124,9 +126,9 @@
                 <p class="text-center text-danger"><span class='btn btn-sm btn-danger' style='border-radius:50%'><i class="fa fa-warning"></i></span> There is no items in cart</p>
             <?php  }  ?>
             </div>
-        <a href="<?php echo URL ?>/home" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Go Back</a>
+        <a href="<?php echo URL ?>/home/index" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Go Back</a>
         
         
     </div>
     <!-- <script src="https://js.stripe.com/v3/"></script> -->
-<?php require_once ROOT ."/views/inc/footer.php" ?>
+<?php //require_once ROOT ."/views/inc/footer.php" ?>

@@ -3,21 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function addProduct(url, id, price) {
+
+
+function addProduct(url, id, price, str) {
     var xhttp = new XMLHttpRequest();
+    if (document.getElementById("qty")) {
+        str = document.getElementById("qty").value;
+    }
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             if (document.getElementById("card-element")) {
                 document.getElementById("card-element").innerHTML = this.responseText;
+            } else {
+                document.getElementById("alert").style.display = "block";
             }
-            else{
-                document.getElementById("alert").style.display="block";
+            if (document.getElementById("qty")) {
+                document.getElementById("qty").value = 0;
             }
         }
     };
-    xhttp.open("GET", url + "/carts/add/" + id + "/" + price, true);
-    xhttp.send();
-
+    xhttp.open("POST", url + "/cart/add/" + id + "/" + price, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("q=" + str);
 }
 function deletePro(url, id) {
     var xhttp = new XMLHttpRequest();
@@ -28,7 +35,7 @@ function deletePro(url, id) {
             document.getElementById("card-element").innerHTML = myObj[1];
         }
     };
-    xhttp.open("GET", url + "/carts/delete/" + id, true);
+    xhttp.open("GET", url + "/cart/delete/" + id, true);
     xhttp.send();
 }
 
@@ -53,6 +60,7 @@ function showResult(url, str) {
 }
 
 function updateQuantity(url, id, str) {
+
     if (str.length == 0) {
         document.getElementById("livesearch").innerHTML = "";
         document.getElementById("livesearch").style.border = "0px";
@@ -62,11 +70,30 @@ function updateQuantity(url, id, str) {
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var myObj = JSON.parse(this.responseText);
-            document.getElementById("cost").innerHTML = myObj[0];
+            if (document.getElementById("cost")) {
+                document.getElementById("cost").innerHTML = myObj[0];
+            }
             document.getElementById("card-element").innerHTML = myObj[1];
         }
     }
-    xmlhttp.open("POST", url + "/carts/updateQty/" + id, true);
+    xmlhttp.open("POST", url + "/cart/updateQty/" + id, true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("q=" + str);
+}
+function resetPwd(url, key) {
+
+    
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var myObj = JSON.parse(this.responseText);
+            if (document.getElementById("cost")) {
+                document.getElementById("cost").innerHTML = myObj[0];
+            }
+            document.getElementById("card-element").innerHTML = myObj[1];
+        }
+    }
+    xmlhttp.open("POST", url + "/users/resetPassword/" + key, true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("password="+Henry+"&lname="+Ford);
 }

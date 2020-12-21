@@ -1,18 +1,23 @@
 <div class="content">
-      <div class="container-form">
-          <div class="signup">
-              <h1 class="signup-heading">Đăng nhập</h1>
-              <form action="<?php echo URL?>/users/login" class="signup-form" method="POST" >
-                  <label for="username" class="signup-label">User name</label>
-                  <input type="text" name="email" class="signup-input" required placeholder="enter your username">
-                  <label for="password" class="signup-label">Password</label>
-                  <input type="password" name="password" class="signup-input" required placeholder="enter your password">
-                  <input type="submit" name="login" class="signup-submit"></input>
-              </form>
-              <p class="signup-already">
-                  <span>Bạn chưa có tài khoản ?</span>
-                  <a href="#" class="signup-login-link">Đăng ký</a>
-              </p>
-          </div>
-      </div>
-  </div>
+    <div class="container-form">
+        <div class="signup">
+            <h1 class="signup-heading">Đăng nhập</h1>
+            <form action="<?php echo URL ?>/users/login" class="signup-form" method="POST" >
+                <label for="username" class="signup-label">User name</label>
+                <input type="text" name="email" class="signup-input" required placeholder="enter your username">
+                <label for="password" class="signup-label">Password</label>
+                <input type="password" name="password" class="signup-input" required placeholder="enter your password">
+                <input type="submit" name="login" class="signup-submit">
+            </form>
+            <p class="signup-already">
+                <span>Bạn chưa có tài khoản ?</span>
+                <a href="<?php echo URL?>/users/register" class="signup-login-link">Đăng ký</a>
+            </p>
+            
+            <p class="signup-already" style="padding-top: 20px">
+                <span><a href="<?php echo URL?>/users/forgotPassword" class="signup-login-link">Quên mật khẩu?</a></span>
+                
+            </p>
+        </div>
+    </div>
+</div>

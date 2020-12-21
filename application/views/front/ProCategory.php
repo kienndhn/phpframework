@@ -46,7 +46,7 @@
                             <div class="card-body">
                                 <h6 class="card-title"><?php echo $pro->name ?></h6>
                                 <a href="<?php echo URL ?>/home/show/<?php echo $pro->product_id ?>" class="btn btn-info btn-sm py-1 float-left" style="font-size:13px">Details</a>
-                                <a href="<?php echo URL ?>/carts/add/<?php echo $pro->product_id ?>/<?php echo $pro->price ?>" class="btn btn-danger btn-sm py-1 float-right" style="font-size:13px"><i class="fa fa-shopping-cart"></i></a>
+                                <a href="<?php echo URL ?>/cart/add/<?php echo $pro->product_id ?>/<?php echo $pro->price ?>" class="btn btn-danger btn-sm py-1 float-right" style="font-size:13px"><i class="fa fa-shopping-cart"></i></a>
                             </div>
                         </div>
                     </div>

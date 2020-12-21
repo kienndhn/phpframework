@@ -16,6 +16,7 @@
     	</div>
     </div>
 <script src="<?php echo URL ?>/js/js.js"></script>
+<script src="<?php echo URL ?>/js/process.js"></script>
 </body>
 
 </html>

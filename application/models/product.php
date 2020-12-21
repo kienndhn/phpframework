@@ -107,7 +107,7 @@ class Product extends Model {
                 ,image
                 ,price,size,color)
             VALUES 
-            (:name,:description,:user,:cat,:man,0,
+            (:name,:description,:user,:cat,:man,1,
             :image,
             :price,:size,:color)
             ");
