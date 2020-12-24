@@ -3,28 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/phpframework/public/dist/jquery.fancybox.js</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/views/home/index.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/views/inc/adminHeader.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/controllers/cartscontroller.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/controllers/userscontroller.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/library/template.class.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/public/dist/jquery.fancybox.min.css</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/views/inc/footer.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/public/dist/jquery.fancybox.css</file>
-            <file>file:/D:/xampp/htdocs/phpframework/public/css/style.css</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/controllers/orderscontroller.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/views/inc/header.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/public/css/css.css</file>
-            <file>file:/D:/xampp/htdocs/phpframework/library/shared.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/views/home/proCategory.php</file>
+            <file>file:/D:/xampp/htdocs/phpframework/application/views/cart/orders.php</file>
+            <file>file:/D:/xampp/htdocs/phpframework/application/controllers/homecontroller.php</file>
+            <file>file:/D:/xampp/htdocs/phpframework/application/controllers/cartcontroller.php</file>
+            <file>file:/D:/xampp/htdocs/phpframework/library/sqlquery.class.php</file>
+            <file>file:/D:/xampp/htdocs/phpframework/application/models/order.php</file>
+            <file>file:/D:/xampp/htdocs/phpframework/application/views/cart/cart.php</file>
             <file>file:/D:/xampp/htdocs/phpframework/application/views/orders/all.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/views/categories/all.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/views/inc/sidebar.php</file>
             <file>file:/D:/xampp/htdocs/phpframework/public/js/js.js</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/views/home/search.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/controllers/productscontroller.php</file>
-            <file>file:/D:/xampp/htdocs/phpframework/application/views/inc/adminFooter.php</file>
         </group>
     </open-files>
 </project-private>

@@ -53,9 +53,9 @@ function showResult(url, str) {
             document.getElementById("livesearch").style.backgroundColor = "white";
         }
     }
-    xmlhttp.open("POST", url + "/home/livesearch", true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("q=" + str);
+    xmlhttp.open("POST", url + "/home/livesearch?q=" +str, true);
+    //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send();
     //xmlhttp.send();
 }
 
@@ -80,20 +80,30 @@ function updateQuantity(url, id, str) {
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("q=" + str);
 }
-function resetPwd(url, key) {
 
-    
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
+function cancelOrder(url, id){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var myObj = JSON.parse(this.responseText);
-            if (document.getElementById("cost")) {
-                document.getElementById("cost").innerHTML = myObj[0];
-            }
-            document.getElementById("card-element").innerHTML = myObj[1];
+            document.getElementById("status-"+id).innerHTML = myObj[0];
+            document.getElementById("cancel-"+id).style.display = "none";
+            document.getElementById("done-"+id).style.display = "none";
         }
-    }
-    xmlhttp.open("POST", url + "/users/resetPassword/" + key, true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("password="+Henry+"&lname="+Ford);
+    };
+    xhttp.open("GET", url + "/cart/cancelOrder/" + id, true);
+    xhttp.send();
+}
+function deliveredOrder(url, id){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var myObj = JSON.parse(this.responseText);
+            document.getElementById("status-"+id).innerHTML = myObj[0];
+            document.getElementById("cancel-"+id).style.display = "none";
+            document.getElementById("done-"+id).style.display = "none";
+        }
+    };
+    xhttp.open("GET", url + "/cart/deliveredOrder/" + id, true);
+    xhttp.send();
 }

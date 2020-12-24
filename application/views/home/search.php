@@ -1,9 +1,9 @@
 
-
-<!-- Nội dung trang home index -->
+<!--
+ Nội dung trang home index 
 <div class="content">
     <div class="container-flex">
-        <!-- bên trái -->
+         bên trái 
         <div class="catagories">
             <div class="catagories-header">
                 <img src="<?php echo URL ?>list.png">
@@ -36,7 +36,7 @@
                 ?>
             </ul>
         </div>
-        <!-- bên phải -->
+         bên phải 
         <div class="products">
             <div class="products-list">
                 <?php
@@ -65,4 +65,5 @@
 </div>
 <script>
    
-</script>
+</script>-->
+<?php require_once ROOTDIR.'/application/views/home/index.php';

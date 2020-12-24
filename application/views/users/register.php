@@ -10,10 +10,10 @@
                 <input type="text" id="email" name="email" class="signup-input" required placeholder="Nhập email">
                 
                 <label for="password" class="signup-label">Mật khẩu</label>
-                <input type="password" id="password" name="password" class="signup-input" required placeholder="Nhập mật khẩu">
+                <input type="password" id="password" name="password" class="signup-input" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Mật khẩu có tối thiểu 8 kí tự, gồm chữ hoa, chữ thường và số" required placeholder="Nhập mật khẩu">
                
                 <label for="password2" class="signup-label">Xác nhận mật khẩu</label>
-                <input type="password" id="password2" name="password2" class="signup-input" required placeholder="Xác nhận mật khẩu">
+                <input type="password" id="password2" name="password2" class="signup-input" required placeholder="Xác nhận mật khẩu" onkeyup="checkPasswork(this.value, <?php echo URL?>)">
                 <input type="submit" name='register' class="signup-submit" value="Đăng kí">
             </form>
             <p class="signup-already">

@@ -40,7 +40,23 @@ class CartController extends Controller {
         Auth::userAuth();
         $this->set('title', 'Orders');
         $this->set('orderDetails', $this->Cart->orderModel->getUserOrderDetalails(Session::name('user_id')));
-        //$this->view('front.orders',$data);
+        $this->set('orders', $this->Cart->orderModel->getAllUserOrder(Session::name('user_id')));
+    }
+
+    
+
+    public function show($id) {
+        Auth::userGuest();
+        $user = Session::name('user_id');
+        $order = $this->Cart->orderModel->showByUser($id, $user);
+        if ($order) {
+            $this->set('order', $order);
+            $this->set('shipping', $this->Cart->orderModel->showShipping($order->shipping_id));
+            $this->set('orderDetails', $this->Cart->orderModel->getAllOrderDetalails($order->order_id));
+            $this->set('title', 'Order ' . $order->order_id);
+        }
+        
+        //$this->view('orders.show', $data);
     }
 
     /* >>>>>>>>>>>>>>>>>>>> */
@@ -52,7 +68,9 @@ class CartController extends Controller {
         if (isset($_POST)) {
             $number = $_POST['q'];
         }
-        $user_id = Session::name('user_id');
+        if (Session::existed('user_id')) {
+            $user_id = Session::name('user_id');
+        }
         if ($this->Cart->findCartPro($pro_id, $user_id) > 0) {
             $this->Cart->addOne($pro_id, $number);
         } else {
@@ -107,7 +125,7 @@ class CartController extends Controller {
                 $qty = $qty + ($cart->qty);
             }
         }
-        $response = json_encode(array(number_format($total, 2, '.', ''), $cartItems));
+        $response = json_encode(array(Random::currency_format($total), $cartItems));
         echo $response;
     }
 
@@ -115,6 +133,29 @@ class CartController extends Controller {
     #<--->   delete   <--->#
     /* <<<<<<<<<<<<<<<<<<<< */
 
+    public function cancelOrder($id) {
+
+        Auth::userGuest();
+        $user= Session::name('user_id');
+        $inActivate = $this->Cart->orderModel->inActivate($id, $user);
+        if ($inActivate) {
+            Session::set('success', 'Item has been inActivated');
+        }
+        $response = json_encode(array('Đã hủy'));
+        echo $response;
+    }
+
+    public function deliveredOrder($id) {
+        Auth::userGuest();
+        $user= Session::name('user_id');
+        $inActivate = $this->Cart->orderModel->Done($id, $user);
+        if ($inActivate) {
+            Session::set('success', 'Item has been inActivated');
+        }
+        $response = json_encode(array('Đã giao'));
+        echo $response;
+    }
+    
     public function delete($id) {
         Auth::userAuth();
         Csrf::CsrfToken();
@@ -156,24 +197,52 @@ class CartController extends Controller {
                         '           </div>' .
                         '       </td>' .
                         '       <td>' . $cart->pro_name . '</td>
-                        <td>' . $cart->price . '</td>' .
+                        <td>' . Random::currency_format($cart->price) . '</td>' .
                         '       <td>
-                            <input style="width: 44px;" type="number" name="quantity" value="' . $cart->qty . '" min="1" onchange="updateQuantity(\'' . URL . '\',\'' . $cart->product . '\' ,this.value)">
+                            <input style="width: 44px;" type="number" name="quantity" value="' . $cart->qty . '" min="1" max=10 onchange="updateQuantity(\'' . URL . '\',\'' . $cart->product . '\' ,this.value)">
                         </td>
-                        <td><button class="btn-delete" onclick="deletePro(\'' . URL . '\', \'' . $cart->cart_id . '\')"><img src="../../public/img/delete.png"></button>
+                        <td><button class="btn-delete" onclick="deletePro(\'' . URL . '\', \'' . $cart->cart_id . '\')">Xóa</button>
                         </td>' .
                         '   </tr>';
                 $total = $total + ($cart->qty * $cart->price);
                 $qty = $qty + ($cart->qty);
             }
             $listPro = $listPro . '  </tbody> 
-            </table> 
-                <div class="checkout">
-                <label>Tổng tiền hàng: </label>
-                <span id="cost">' . number_format($total, 2, '.', '')
-                    . '
-                </span>
-                <button id="btn-checkout">Thanh toán</button>
+            </table> <div class="checkout" >
+                <div class="signup" style="margin: auto">
+                    <label class="signup-label"><h1 class="signup-heading" style="font-size: 20px">Tổng: </h1></label>
+                    <span id="cost">' . Random::currency_format($total) . '
+                    </span>
+                    <h2 class="signup-heading">Thông tin thanh toán</h2>
+                    <form action="' . URL . '/cart/checkout" method="POST" class="signup-form" autocomplete="off">
+                        <label for="name" class="signup-label">Tên người nhận</label>
+                        <input type="text" id="name" name="name" class="signup-input" required placeholder="Nhập tên người nhận">
+                        <label for="phone" class="signup-label">Email</label>
+                        <input type="tel" id="email" name="email" class="signup-input" required placeholder="Nhập email" value="">
+                        <label for="phone" class="signup-label">Số điện thoại</label>
+                        <input type="tel" id="phone" name="mobile" class="signup-input" required placeholder="ex: 0123456789" pattern="[0-9]{10}">
+                        <label for="province" class="signup-label">Tỉnh/ thành phố</label>
+                        <input type="text" id="city" name="city" class="signup-input" required placeholder="thành phố">
+                        <label for="street" class="signup-label">Địa chỉ</label>
+                        <input type="text" id="address" name="address"class="signup-input" required placeholder="enter your street">
+                        <label class="signup-label">Cách thanh toán</label><br>
+                        <div style="border: solid 1px; border-radius: 2px">
+                            <input type="radio" id="payment" name="payment_method" value="Thanh toan khi nhan hang" checked>
+                            <label for="payment">Thanh toán khi nhận hàng</label>
+                        </div>
+                        <br>
+                        <input type="hidden" name="csrf" value="<?php new Csrf(); echo Csrf::get()?>">
+                        <input type="hidden" name="qty" value="' . $qty . '">
+                        <input type="hidden" name="total" value="' . $total . '">
+                        <input type="submit" name="billTo" class="signup-submit" value="Đặt hàng"></button>
+                    </form>
+                </div>
+
+                
+            </div>';
+        } else {
+            $listPro = '<div>
+                <span class="signup-heading" style="display: grid; font-size: 30px">Không có sản phẩm trong giỏ</span>
             </div>';
         }
         $response = json_encode(array($listPro, $cartItems));
@@ -239,14 +308,14 @@ class CartController extends Controller {
                 $this->set('cart', $cart);
                 foreach ($cart as $cart) {
                     $this->Cart->orderModel->addToOrderDetails(
-                        $order_id, $cart->product, $cart->pro_name,
-                        $cart->price, $cart->qty, Session::name('user_id')
+                            $order_id, $cart->product, $cart->pro_name,
+                            $cart->price, $cart->qty, Session::name('user_id')
                     );
                 }
 
                 $this->Cart->clear();
                 Session::set('user_cart', '0');
-                Redirect::to("cart/thank");
+                Redirect::to("cart/orders");
             } else {
                 $this->set('cart', $this->Cart->getAllCart());
             }

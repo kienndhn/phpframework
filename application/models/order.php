@@ -23,6 +23,28 @@ class Order extends Model {
         }
     }
 
+    public function getAllUserOrder($id, $status = '') {
+        if ($status == '') {
+            $sql = "";
+        } else {
+            $sql = "AND c_order.status=$status";
+        }
+
+        $this->query("SELECT c_order.*, users.full_name as
+            creator, payment.payment_method as method FROM c_order 
+            INNER JOIN users ON c_order.customer_id = users.user_id
+            INNER JOIN payment ON c_order.payment_id = 
+            payment.payment_id WHERE c_order.customer_id= :customer_id
+             $sql");
+        $this->bind(':customer_id', $id);
+        $orders = $this->resultSet();
+        if ($orders) {
+            return $orders;
+        } else {
+            return false;
+        }
+    }
+
     public function addToShipping($name, $email, $mobile, $address, $city) {
         $this->query("INSERT INTO shipping 
             (full_name,email,mobile,address,city)
@@ -48,7 +70,7 @@ class Order extends Model {
         $this->query("INSERT INTO c_order (customer_id,shipping_id,
             payment_id,order_status,order_total)
             VALUES(:customer_id,:shipping_id,
-            :payment_id,0,:order_total)");
+            :payment_id,1,:order_total)");
         $this->bind(':customer_id', $customer);
         $this->bind(':shipping_id', $shipping);
         $this->bind(':payment_id', $payment);
@@ -70,6 +92,14 @@ class Order extends Model {
         $this->bind(':product_qty', $qty);
         $this->bind(':user', $user);
         $this->execute();
+    }
+
+    public function showByUser($id, $user) {
+        $this->query("SELECT * FROM c_order 
+            WHERE order_id=:order_id AND customer_id=:custom_id");
+        $this->bind(':order_id', $id);
+        $this->bind(':custom_id', $user);
+        return $this->single();
     }
 
     public function show($id) {
@@ -116,6 +146,20 @@ class Order extends Model {
     public function inActivate($id) {
         $this->query("UPDATE c_order SET order_status  = 0 WHERE order_id=:id");
         $this->bind(':id', $id);
+        return $this->execute();
+    }
+    
+    public function Cancel($id, $user) {
+        $this->query("UPDATE c_order SET order_status  = 0 WHERE order_id=:id AND customer_id=:customer_id");
+        $this->bind(':id', $id);
+        $this->bind('customer_id', $user);
+        return $this->execute();
+    }
+    
+    public function Done($id, $user) {
+        $this->query("UPDATE c_order SET order_status  = 2 WHERE order_id=:id AND customer_id=:customer_id");
+        $this->bind(':id', $id);
+        $this->bind('customer_id', $user);
         return $this->execute();
     }
 

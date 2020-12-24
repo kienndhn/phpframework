@@ -30,7 +30,7 @@
                 </p>
             </div>
             <div class="product-detail">
-                <label>Số lượng: </label><input id="qty" style="width: 44px;" type="number" name="quantity" value="10" min="0">
+                <label>Số lượng: </label><input id="qty" style="width: 44px;" type="number" name="quantity" value="0" max="10" min="0">
             </div>
             <div class="product-detail">
                 <div class="btn-add-to-cart" ><button onclick="addProduct('<?php echo URL ?>', '<?php echo $product->product_id ?>', '<?php echo $product->price ?>', 1)">Add to cart</button></div>

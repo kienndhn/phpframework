@@ -10,7 +10,9 @@
     </head>
 
     <body>
-        <?php // echo var_dump($_SESSION)?>
+        <?php
+        //echo var_dump($_SESSION);
+        ?>
         <!-- Header -->
         <div class="header">
             <div class="header-top">
@@ -19,7 +21,8 @@
                     <?php if (!Session::existed('user_id')) { ?>
                         <a href="<?php echo URL ?>/users/login">Đăng nhập</a>
                         <a href="<?php echo URL ?>/users/register">Đăng ký</a>
-                    <?php } else { ?>
+                    <?php }else 
+                    { ?>
                         <?php if (Session::existed('user_cart')) { ?>
                             <div class = "cart">
                                 <a href = "<?php echo URL ?>/cart/cart">
@@ -47,11 +50,11 @@
             </div>
             <div class = "header-content">
                 <div class = "logo">
-                    <a href = "<?php echo URL ?>/home/index"><img src = "<?php echo PATH_URL_IMG ?>logo.png" alt = "shop logo"></a>
+                    <a href = "<?php echo URL ?>/home/index">DKLN Shop</a>
                 </div>
                 <div class = "search">
                     <div class = "search-input">
-                        <form action="<?php echo URL ?>/home/search" method='POST' id="form1" autocomplete="off">
+                        <form action="<?php echo URL ?>/home/search" method="get" id="form1" autocomplete="off">
                             <input type = "text" placeholder = "Enter keyword here" name="search" onkeyup="showResult('<?php echo URL ?>', this.value)">
                             <button type="submit" form="form1" class = "search-button"><img src = "<?php echo URL ?>/public/uploads/search.png" alt = "search logo"></button>
                         </form>

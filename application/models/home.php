@@ -17,12 +17,14 @@ class Home extends Model {
     public $categoryModel;
     public $manufactureModel;
     public $productModel;
+    public $cartModel;
 
     public function __construct() {
         parent::__construct();
         $this->categoryModel=$this->model('Category');
         $this->manufactureModel = $this->model('Manufacture');
         $this->productModel = $this->model('Product');
+        $this->cartModel = $this->model('Cart');
     }
 
 }

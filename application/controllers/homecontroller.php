@@ -2,41 +2,25 @@
 
 class HomeController extends Controller {
 
-//        private $categoryModel;
-//        private $manufactureModel;
-//        private $productModel;
-
-    /* >>>>>>>>>>>>>>>>>>>> */
-    #<--->  construct <--->#
-    /* <<<<<<<<<<<<<<<<<<<< */
-//        public function __construct(){
-//            //new Session;
-//            $this->categoryModel = $this->model('Category');
-//            $this->manufactureModel = $this->model('Manufacture');
-//            $this->productModel = $this->model('Product');
-//        }
-
-    /* >>>>>>>>>>>>>>>>>>>> */
-    #<--->   index    <--->#
-    /* <<<<<<<<<<<<<<<<<<<< */
     public function index() {
-//            $this->set('title', 'Home');
-//            $category = $this->Home->categoryModel->getAllCat(1);
-//            
-//            $this->set('categories', $category);
-//            $this->set('manufactures', $this->Home->manufactureModel->getAllMan(1));
-//            
-//            
-//            for($i = 0; $i < count($category); $i++){
-//                $product[$i] = $this->Home->productModel->getProByCat($category[$i]->cat_id);
-//            }
-//            //$product = $this->Home->productModel->getAllPro();
-//            $this->set('products', $product);
-//            //var_dump($product);
+
         $this->set('title', 'Home');
-        //$this->categoryModel = $this->model('Category');
-        //$this->manufactureModel = $this->model('Manufacture');
-        //$this->productModel = $this->model('Product');
+        
+        if (Session::existed('use_id')) {
+            $cart = $this->Home->cartModel->getAllCart();
+            $this->set('cart', $cart);
+            $cartItems = 0;
+            if ($cart) {
+                foreach ($cart as $cart) {
+                    $cartItems = $cartItems + $cart->qty;
+                }
+            } else {
+                $cartItems = 0;
+            }
+            if (Session::existed('user_cart')) {
+                Session::set('user_cart', $cartItems);
+            }
+        }
         $this->set('categories', $this->Home->categoryModel->getAllCat(1));
         $this->set('manufactures', $this->Home->manufactureModel->getAllMan(1));
         $this->set('products', $this->Home->productModel->getAllPro());
@@ -48,27 +32,29 @@ class HomeController extends Controller {
 
     public function search() {
         $this->set('title', 'Products');
-        $searched = $_POST['search'];
+        $searched = $_GET['search'];
+
         $this->set('categories', $this->Home->categoryModel->getAllCat(1));
         $this->set('manufactures', $this->Home->manufactureModel->getAllMan(1));
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $results = $this->Home->productModel->search($searched);
             $this->set('products', $results);
             //$this->view('front.index', $data);
         } else {
-            Redirect::to('home/index');
+            //Redirect::to('home/index');
         }
     }
 
     public function livesearch() {
-        $q = $_POST['q'];
+
+        $q = $_GET['q'];
         $products = $this->Home->productModel->getAllPro();
         $hint = "";
-        $j=0;
-        if (strlen($q) > 3) {
+        $j = 0;
+        if (strlen($q) > 0) {
             $hint = "";
             foreach ($products as $products) {
-                if($j > 10){
+                if ($j > 10) {
                     break;
                 }
                 if (stristr($products->name, $q)) {
@@ -80,7 +66,6 @@ class HomeController extends Controller {
                         $hint = $hint . '<br/><a href="' . URL . '/home/details/' . $products->product_id . '" style="text-decoration: none;margin: 10px; display: flex;">' . $products->name . '</a>';
                     }
                 }
-                
             }
         }
         if ($hint == "") {

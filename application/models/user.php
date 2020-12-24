@@ -25,6 +25,7 @@ class User extends Model {
     }
 
     public function login($email, $password) {
+        echo($email);
         $this->query("SELECT * FROM users WHERE email =:email");
         $this->bind(':email', $email);
         $user = $this->single();
